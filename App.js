@@ -1,8 +1,12 @@
 import React from 'react';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, createNavigationContainerRef } from '@react-navigation/native';
+//import { createNavigationContainerRef } from '@react-navigation/native';
 import ModalStackScreen from './navigation/ModalStackScreen';
 import { ThemeProvider, useTheme } from './context/ThemeContext'; // Adjust the path as necessary
 import { AuthProvider } from './context/AuthContext';
+
+export const navigationRef = createNavigationContainerRef();
+
 
 const App = () => {
   return (
@@ -16,7 +20,6 @@ const App = () => {
 
 const ThemedApp = () => {
   const { isDarkTheme } = useTheme();
-
   return (
     <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
       <ModalStackScreen />
@@ -25,3 +28,13 @@ const ThemedApp = () => {
 };
 
 export default App;
+
+export function navigate(name, params) {
+  console.log(`Attempting to navigate to ${name} with params:`, params);
+  if (navigationRef.isReady()) {
+    console.log(`Navigating to ${name}`);
+    navigationRef.navigate(name, params);
+  } else {
+    console.log(`Navigation ref not ready`);
+  }
+}

@@ -1,5 +1,5 @@
 // context/AuthContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect  } from 'react';
 import { register as apiRegister, login as apiLogin, logout as apiLogout } from '../api';
 
 const AuthContext = createContext();
@@ -10,6 +10,14 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
+  useEffect(() => {
+    setIsAuthenticated(!!userToken);
+  }, [userToken]);
+
+
 
   const signIn = async (email, password) => {
     // Implement your login logic here
@@ -40,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ userToken, signIn, signOut, register }}>
+    <AuthContext.Provider value={{ isAuthenticated, userToken, signIn, signOut, register }}>
       {children}
     </AuthContext.Provider>
   );

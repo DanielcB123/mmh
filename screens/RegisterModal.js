@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../context/AuthContext'; 
+import { navigate } from '../App';
+
 
 function RegisterModal({ navigation }) {
   // States for registration
@@ -8,14 +11,26 @@ function RegisterModal({ navigation }) {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
+
+  const mynavigation = useNavigation();
   const { register } = useAuth();
 
   const handleRegister = async () => {
+    
     try {
       await register(name, email, password);
-      console.log('register success');
+      console.log('register successs');
       // Optionally close the modal upon successful registration
-      navigation.goBack();
+      // navigation.goBack();
+
+        // User is authenticated, navigate to the Dashboard
+        // mynavigation.navigate('Dashboard');
+        //navigation.goBack();
+        navigate('Dashboard');
+        
+        // User is not authenticated, navigate to the login screen or another initial screen
+        //navigation.goBack();
+
     } catch (error) {
       console.error(error);
       // Handle registration errors here
@@ -54,7 +69,13 @@ function RegisterModal({ navigation }) {
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
-      <Button title="Close" onPress={() => navigation.goBack()} color="#007b9f" />
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.cancelButton}
+        activeOpacity={0.6} // Optional: Adjust the opacity for the press effect
+      >
+        <Text style={styles.buttonText}>Cancel</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -97,6 +118,16 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  cancelButton: {
+    backgroundColor: '#9ca3af', // Light gray
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginBottom: 15, // Add spacing between the Register button and Close button
   },
 });
 
