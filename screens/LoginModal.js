@@ -40,7 +40,13 @@ function LoginModal() {
         placeholderTextColor="#888"
         secureTextEntry={true}
       />
-      <TouchableOpacity style={[styles.button, { backgroundColor: isDarkTheme ? '#155e75' : '#007bff' }]} onPress={handleLogin}>
+      <TouchableOpacity 
+                style={[styles.button, {
+
+                  backgroundColor: isDarkTheme ? '#166534' : '#34d399' 
+                }]}
+        onPress={handleLogin}
+        >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.cancelButton, { backgroundColor: isDarkTheme ? '#6b7280' : '#9ca3af' }]} onPress={() => navigation.goBack()}>
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
   },
   button: {
-    backgroundColor: '#007bff',
+    // backgroundColor: '#007bff',
     padding: 10,
     width: '100%',
     alignItems: 'center',

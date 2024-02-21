@@ -17,15 +17,21 @@ function HomeScreen({ navigation }) {
       <View style={{ flex: 1 }} />
       <TouchableOpacity
         onPress={() => navigation.navigate('RegisterModal')}
-        style={[styles.button, { backgroundColor: isDarkTheme ? '#155e75' : '#007bff' }]}
+        style={[styles.button, {
+          borderColor: isDarkTheme ? '#155e75' : '#0ea5e9',
+          backgroundColor: isDarkTheme ? '#155e75' : '#bae6fd' 
+        }]}
       >
-        <Text style={styles.buttonText}>Register</Text>
+        <Text style={styles.registerButtonText}>Register</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('LoginModal')} // Assuming you have a "LoginModal" route
-        style={[styles.button, { backgroundColor: isDarkTheme ? '#166534' : '#34a853' }]} 
+        onPress={() => navigation.navigate('LoginModal')}
+        style={[styles.button, {
+          borderColor: isDarkTheme ? '#166534' : '#34d399',
+          backgroundColor: isDarkTheme ? '#166534' : '#a7f3d0' 
+        }]}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 20,
-    paddingBottom: 60, 
+    paddingBottom: 60,
   },
   switchContainer: {
     position: 'absolute',
@@ -48,14 +54,29 @@ const styles = StyleSheet.create({
   button: {
     width: '80%',
     padding: 15,
-    marginVertical: 10, 
+    marginVertical: 10,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4, // Elevation for Android
   },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 16,
+  registerButtonText: {
+    color: '#0ea5e9',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  loginButtonText: {
+    color: '#10b981',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

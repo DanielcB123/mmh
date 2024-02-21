@@ -48,7 +48,7 @@ function RegisterModal() {
         placeholderTextColor="#888"
         secureTextEntry={true}
       />
-      <TouchableOpacity style={[styles.button, { backgroundColor: isDarkTheme ? '#155e75' : '#007bff' }]} onPress={handleRegister}>
+      <TouchableOpacity style={[styles.button, { backgroundColor: isDarkTheme ? '#155e75' : '#38bdf8' }]} onPress={handleRegister}>
       <Text style={[styles.buttonText]}>Register</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, { backgroundColor: isDarkTheme ? '#6b7280' : '#9ca3af' }]} onPress={() => navigation.goBack()}>

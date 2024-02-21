@@ -14,50 +14,35 @@ const Tab = createBottomTabNavigator();
 function MainTabNavigator() {
   const { isAuthenticated, signOut } = useAuth();
 
-  console.log('is authenticated = '+isAuthenticated);
   return (
     <Tab.Navigator
-      key={isAuthenticated ? "authenticated" : "unauthenticated"} // This forces a re-render when the authentication state changes
+      key={isAuthenticated ? "authenticated" : "unauthenticated"} 
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'About') {
-            iconName = focused ? 'information-circle' : 'information-circle-outline';
+          switch (route.name) {
+            case 'Home':
+              iconName = focused ? 'home' : 'home-outline';
+              break;
+            case 'About':
+              iconName = focused ? 'information-circle' : 'information-circle-outline';
+              break;
+            case 'Dashboard':
+              iconName = focused ? 'speedometer' : 'speedometer-outline'; // Example icons for Dashboard
+              break;
+            case 'Profile':
+              iconName = focused ? 'person' : 'person-outline'; // Example icons for Profile
+              break;
+            default:
+              iconName = 'ban'; // A default icon in case none of the above
+              break;
           }
-          // Add more else if blocks for other tabs as needed
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'dodgerblue',
         tabBarInactiveTintColor: 'gray',
       })}
     >
-
-      {/* {isAuthenticated && (
-        <>
-          <Tab.Screen
-            name="Dashboard"
-            component={DashboardScreen}
-            options={({ navigation }) => ({
-              headerRight: () => (
-                <Button
-                  onPress={() => {
-                    signOut();
-                  }}
-                  title="Logout"
-                  color="gray"
-                />
-              ),
-              headerRightContainerStyle: {
-                paddingRight: 15, 
-              },
-            })}
-          />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
-        </>
-      )} */}
-
       {!isAuthenticated ? (
         <>
           <Tab.Screen 
@@ -97,16 +82,18 @@ function MainTabNavigator() {
               headerRightContainerStyle: {
                 paddingRight: 15, 
               },
+              tabBarLabel: 'Dashboard', // Specify label if needed
             })}
           />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
+          <Tab.Screen 
+            name="Profile" 
+            component={ProfileScreen} 
+            options={{
+              tabBarLabel: 'Profile', // Specify label if needed
+            }} 
+          />
         </>
-        
-      )} 
-
-      {/* <Tab.Screen name="Messaging" component={MessagingScreen} /> */}
-
-
+      )}
     </Tab.Navigator>
   );
 }
