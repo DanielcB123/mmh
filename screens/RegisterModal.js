@@ -1,79 +1,57 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../context/AuthContext'; 
-import { navigate } from '../App';
+import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext'; // Import useTheme
 
-
-function RegisterModal({ navigation }) {
-  // States for registration
+function RegisterModal() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-
-
-  const mynavigation = useNavigation();
   const { register } = useAuth();
+  const navigation = useNavigation(); // Use useNavigation hook for navigation
+  const { isDarkTheme } = useTheme(); // Use the theme context to check if dark theme is active
 
   const handleRegister = async () => {
-    
     try {
       await register(name, email, password);
-      console.log('register successs');
-      // Optionally close the modal upon successful registration
-      // navigation.goBack();
-
-        // User is authenticated, navigate to the Dashboard
-        // mynavigation.navigate('Dashboard');
-        //navigation.goBack();
-        navigate('Dashboard');
-        
-        // User is not authenticated, navigate to the login screen or another initial screen
-        //navigation.goBack();
-
+      console.log('Register success');
+      // Optionally navigate or provide feedback
     } catch (error) {
-      console.error(error);
-      // Handle registration errors here
+      console.error('Register error', error);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+    <View style={[styles.container, { backgroundColor: isDarkTheme ? '#333' : '#f3f4f6' }]}>
+      <Text style={[styles.title, { color: isDarkTheme ? '#ffffff' : '#000000' }]}>Register</Text>
       <TextInput
-        placeholder="Name"
-        placeholderTextColor="#888"
-        style={styles.input}
+        style={[styles.input, { backgroundColor: isDarkTheme ? '#d1d5db' : '#fff' }]}
         value={name}
         onChangeText={setName}
-        autoCapitalize="words"
+        placeholder="Name"
+        placeholderTextColor="#888"
       />
       <TextInput
-        placeholder="Email"
-        placeholderTextColor="#888"
-        style={styles.input}
+        style={[styles.input, { backgroundColor: isDarkTheme ? '#d1d5db' : '#fff' }]}
         value={email}
         onChangeText={setEmail}
+        placeholder="Email"
+        placeholderTextColor="#888"
         keyboardType="email-address"
-        autoCapitalize="none"
       />
       <TextInput
-        placeholder="Password"
-        placeholderTextColor="#888"
-        style={styles.input}
+        style={[styles.input, { backgroundColor: isDarkTheme ? '#d1d5db' : '#fff' }]}
         value={password}
         onChangeText={setPassword}
-        secureTextEntry
-        autoCapitalize="none"
+        placeholder="Password"
+        placeholderTextColor="#888"
+        secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Register</Text>
+      <TouchableOpacity style={[styles.button, { backgroundColor: isDarkTheme ? '#155e75' : '#007bff' }]} onPress={handleRegister}>
+      <Text style={[styles.buttonText]}>Register</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.cancelButton}
-        activeOpacity={0.6} // Optional: Adjust the opacity for the press effect
-      >
+      <TouchableOpacity style={[styles.button, { backgroundColor: isDarkTheme ? '#6b7280' : '#9ca3af' }]} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Cancel</Text>
       </TouchableOpacity>
     </View>
@@ -83,51 +61,48 @@ function RegisterModal({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-start', 
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    paddingTop: 20, 
+    paddingHorizontal: 20,
     backgroundColor: 'white',
   },
   title: {
-    color: '#64748b',
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#000',
     marginBottom: 20,
   },
   input: {
     width: '100%',
-    height: 50,
-    padding: 10,
-    marginBottom: 15,
-    backgroundColor: '#fff',
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1,
-    borderColor: '#ddd',
+    marginBottom: 12,
+    padding: 10,
     borderRadius: 5,
+    backgroundColor: '#fff',
   },
   button: {
+    backgroundColor: '#007bff',
+    padding: 10,
     width: '100%',
-    height: 50,
-    backgroundColor: '#007b9f',
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    justifyContent: 'center',
     borderRadius: 5,
-    marginBottom: 15, // Add spacing between the Register button and Close button
+    marginBottom: 10,
+  },
+  cancelButton: {
+    backgroundColor: '#6c757d',
+    padding: 10,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  cancelButton: {
-    backgroundColor: '#9ca3af', // Light gray
-    width: '100%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    marginBottom: 15, // Add spacing between the Register button and Close button
+    fontSize: 16,
   },
 });
 

@@ -10,8 +10,23 @@ function ModalStackScreen() {
   return (
     <RootStack.Navigator>
       <RootStack.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false }} />
-      <RootStack.Screen name="LoginModal" component={LoginModal} options={{ presentation: 'modal' }} />
-      <RootStack.Screen name="RegisterModal" component={RegisterModal} options={{ presentation: 'modal' }} />
+      <RootStack.Screen 
+        name="LoginModal" 
+        component={LoginModal} 
+        options={{ 
+          presentation: 'modal',
+          headerTitle: ''
+        }}
+        />
+      <RootStack.Screen 
+        name="RegisterModal" 
+        component={RegisterModal} 
+        options={{ 
+          presentation: 'modal',
+          headerTitle: '' // This sets the title to an empty string
+        }} 
+      />
+
     </RootStack.Navigator>
   );
 }

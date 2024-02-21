@@ -1,67 +1,61 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Switch } from 'react-native';
-import { useTheme } from '../context/ThemeContext'; // Adjust the path as necessary
+import { useTheme } from '../context/ThemeContext';
 
 function HomeScreen({ navigation }) {
   const { isDarkTheme, toggleTheme } = useTheme();
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
+  return (
+    <View style={[styles.container, { backgroundColor: isDarkTheme ? '#333' : '#f3f4f6' }]}>
+      <View style={styles.switchContainer}>
         <Switch
           value={isDarkTheme}
           onValueChange={toggleTheme}
-          style={{ marginLeft: 10 }} // Provide some space from the edge
         />
-      ),
-      headerRight: () => (
-        <View style={{ flexDirection: 'row', paddingRight: 10 }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('LoginModal')}
-            style={[styles.button, isDarkTheme ? styles.dark : styles.light]}
-          >
-            <Text style={[styles.buttonText, isDarkTheme ? styles.textDark : styles.textLight]}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('RegisterModal')}
-            style={[styles.button, isDarkTheme ? styles.dark : styles.light, { marginLeft: 8 }]} // Add some spacing between buttons
-          >
-            <Text style={[styles.buttonText, isDarkTheme ? styles.textDark : styles.textLight]}>Register</Text>
-          </TouchableOpacity>
-        </View>
-      ),
-    });
-  }, [navigation, isDarkTheme, toggleTheme]);
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
+      </View>
+      {/* Spacer view to push buttons to the bottom */}
+      <View style={{ flex: 1 }} />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('RegisterModal')}
+        style={[styles.button, { backgroundColor: isDarkTheme ? '#155e75' : '#007bff' }]}
+      >
+        <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('LoginModal')} // Assuming you have a "LoginModal" route
+        style={[styles.button, { backgroundColor: isDarkTheme ? '#166534' : '#34a853' }]} 
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 20,
+    paddingBottom: 60, 
+  },
+  switchContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    padding: 20,
+  },
   button: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 4,
+    width: '80%',
+    padding: 15,
+    marginVertical: 10, 
+    borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
+    color: '#ffffff',
     fontSize: 16,
-  },
-  dark: {
-    backgroundColor: '#666', // Dark button background color
-  },
-  light: {
-    backgroundColor: '#ddd', // Light button background color
-  },
-  textDark: {
-    color: '#fff', // Text color for dark theme
-  },
-  textLight: {
-    color: '#000', // Text color for light theme
   },
 });
 

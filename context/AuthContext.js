@@ -1,6 +1,8 @@
 // context/AuthContext.js
 import React, { createContext, useState, useContext, useEffect  } from 'react';
 import { register as apiRegister, login as apiLogin, logout as apiLogout } from '../api';
+import { navigate } from '../App';
+//import { CommonActions } from '@react-navigation/native';
 
 const AuthContext = createContext();
 
@@ -13,22 +15,52 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 
+  // useEffect(() => {
+  //   console.log(`userToken changed: ${userToken}`);
+  //   setIsAuthenticated(!!userToken);
+  // }, [userToken]);
+  
   useEffect(() => {
     setIsAuthenticated(!!userToken);
-  }, [userToken]);
-
-
+    if (isAuthenticated) {
+      console.log('Attempting to navigate to Dashboard');
+      navigate('Dashboard');
+    }
+  }, [isAuthenticated, userToken]);
+  
 
   const signIn = async (email, password) => {
-    // Implement your login logic here
-    // For example, authenticate against a backend and get a token
-    // This is a placeholder implementation
-    setUserToken("dummy-token");
+    try {
+      const response = await apiLogin({ email, password });
+      console.log('Login successful, user token:', response.data.token);
+      setUserToken(response.data.token);
+      // Optionally set isAuthenticated based on the presence of the token
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error('Login failed', error);
+      throw error;
+    }
   };
+  
 
-  const signOut = () => {
-    setUserToken(null);
+  const signOut = async () => {
+    console.log('test');
+    try {
+       await apiLogout(userToken);
+      //  setIsAuthenticated(false);
+       console.log('test 1');
+       setUserToken(null);
+
+       console.log('test 2');
+
+      console.log('test 3');
+      //navigate('Home');
+      console.log('User signed out');
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
   };
+  
 
   const register = async (name, email, password) => {
     try {
@@ -40,6 +72,7 @@ export const AuthProvider = ({ children }) => {
       const token = response.data.token; // Adjust this line based on your actual API response
       setUserToken(token);
       //     await SecureStore.setItemAsync('userToken', token);
+      //navigate('Dashboard');
     } catch (error) {
       console.error(error);
       throw new Error('Failed to register');

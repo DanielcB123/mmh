@@ -21,7 +21,10 @@ const App = () => {
 const ThemedApp = () => {
   const { isDarkTheme } = useTheme();
   return (
-    <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+    <NavigationContainer  
+        ref={navigationRef}
+        theme={isDarkTheme ? DarkTheme : DefaultTheme}
+    >
       <ModalStackScreen />
     </NavigationContainer>
   );
