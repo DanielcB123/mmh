@@ -35,7 +35,7 @@ function AboutScreen({ navigation }) {
   
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkTheme ? '#333' : '#f3f4f6' }]}>
+    <View style={[styles.container, { backgroundColor: isDarkTheme ? '#1e292e' : '#f3f4f6' }]}>
       {/* Position the switch container absolutely within the parent container */}
       <View style={styles.switchContainer}>
         <Switch

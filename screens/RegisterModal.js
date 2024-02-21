@@ -23,7 +23,7 @@ function RegisterModal() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkTheme ? '#333' : '#f3f4f6' }]}>
+    <View style={[styles.container, { backgroundColor: isDarkTheme ? '#1e292e' : '#b2dac8' }]}>
       <Text style={[styles.title, { color: isDarkTheme ? '#ffffff' : '#000000' }]}>Register</Text>
       <TextInput
         style={[styles.input, { backgroundColor: isDarkTheme ? '#d1d5db' : '#fff' }]}
