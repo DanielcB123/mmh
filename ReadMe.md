@@ -31,5 +31,5 @@ Ensure that all team members are on the same page by regularly pulling changes f
 
     git pull origin main
 
-### Before pushing new changes, it's a good practice to pull the latest updates to avoid conflicts.
+### Before pushing new changes, you MUST pull the latest updates to avoid conflicts.
 
