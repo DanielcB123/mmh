@@ -6,7 +6,7 @@ function HomeScreen({ navigation }) {
   const { isDarkTheme, toggleTheme } = useTheme();
 
   return (
-    <ScrollView contentContainerStyle={[styles.container, { backgroundColor: isDarkTheme ? '#1e292e' : '#b2dac8' }]}>
+    <ScrollView contentContainerStyle={[styles.container, { backgroundColor: isDarkTheme ? '#04080F' : '#A1C6EA'  }]}>
       {/* Theme Switch */}
       <View style={styles.switchContainer}>
         <Switch
@@ -19,12 +19,12 @@ function HomeScreen({ navigation }) {
         <View style={styles.heroSection}>
         {isDarkTheme ? (
           <Image 
-            source={require('../images/homeimage3.png')} 
+            source={require('../images/DarkMode.png')} 
             style={styles.heroImage} 
           />
         ) : (
           <Image 
-            source={require('../images/homeimage2.png')} 
+            source={require('../images/LoginRegister.png')} 
             style={styles.heroImage} 
           />
         )}
@@ -101,14 +101,14 @@ const styles = StyleSheet.create({
   },
   heroSubtitle: {
     color: 'white',
-    fontWeight:500,
+    fontWeight: '500',
     marginTop: 10,
     fontSize: 16,
     textAlign: 'center',
   },
   featuresSection: {
     color: 'white',
-    fontWeight:500,
+    fontWeight: '500',
     width: '100%',
     marginBottom: 20,
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   featuresSubtitle: {
     color: 'white',
-    fontWeight:500,
+    fontWeight: '500',
     marginTop: 10,
     fontSize: 16,
     textAlign: 'center',
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   featureDescription: {
     color: 'white',
-    fontWeight:500,
+    fontWeight: '500',
     marginTop: 5,
     fontSize: 14,
   },
