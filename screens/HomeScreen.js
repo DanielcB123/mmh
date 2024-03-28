@@ -101,14 +101,14 @@ const styles = StyleSheet.create({
   },
   heroSubtitle: {
     color: 'white',
-    fontWeight: '500',
+    fontWeight:'500',
     marginTop: 10,
     fontSize: 16,
     textAlign: 'center',
   },
   featuresSection: {
     color: 'white',
-    fontWeight: '500',
+    fontWeight:'500',
     width: '100%',
     marginBottom: 20,
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   featuresSubtitle: {
     color: 'white',
-    fontWeight: '500',
+    fontWeight:'500',
     marginTop: 10,
     fontSize: 16,
     textAlign: 'center',
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   featureDescription: {
     color: 'white',
-    fontWeight: '500',
+    fontWeight:'500',
     marginTop: 5,
     fontSize: 14,
   },

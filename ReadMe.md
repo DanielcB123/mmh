@@ -33,3 +33,14 @@ Ensure that all team members are on the same page by regularly pulling changes f
 
 ### Before pushing new changes, you MUST pull the latest updates to avoid conflicts.
 
+## Starting Environment Previous Issues
+
+
+***ERROR**
+ ERROR:
+    TypeError: _RNGestureHandlerModule.default.flushOperations is not a function (it is undefined), js engine: hermes
+
+ Solution: run these commands
+
+    npm uninstall react-native-gesture-handler
+    npm install react-native-gesture-handler
